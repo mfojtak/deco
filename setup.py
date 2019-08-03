@@ -10,14 +10,14 @@ with codecs.open('requirements.txt', 'r', 'utf8') as reader:
 
 
 setup(
-    name='mirbox',
+    name='deco',
     version='0.0.1',
     packages=find_packages(),
-    url='https://github.com/mfojtak/mirbox',
+    url='https://github.com/mfojtak/deco',
     license='MIT',
     author='mfojtak',
     author_email='mfojtak@seznam.cz',
-    description='mirbox',
+    description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
     install_requires=install_requires,
