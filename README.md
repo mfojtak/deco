@@ -1,2 +1,2 @@
-![alt text](https://raw.githubusercontent.com/mfojtak/deco/master/drawing.svg)
+![alt text](drawing.svg)
 # deco
