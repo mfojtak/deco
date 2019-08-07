@@ -21,7 +21,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     install_requires=install_requires,
-    scripts=['export_to_serving.py'],
+    scripts=['export_to_serving.py', 'server.py'],
     classifiers=(
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.6",
