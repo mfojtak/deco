@@ -1,0 +1,1 @@
+from deco.tokenizers.sentencepiece import SentencepieceTokenizer
