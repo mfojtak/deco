@@ -2,6 +2,8 @@ import tensorflow as tf
 import tf_sentencepiece as tfs
 import sys
 import collections
+import json
+import base64
 
 
 @tf.function
@@ -17,12 +19,13 @@ def pad(x, limit):
 
 class BertInput(tf.keras.layers.Layer):
 
-    def __init__(self, tokenizer, max_length=128):
+    def __init__(self, tokenizer=None, tokenizer_path=None, max_length=128):
         super(BertInput, self).__init__()
-        if isinstance(tokenizer, str):
-            self.tokenizer = open(tokenizer, "rb").read()
-        else:
-            self.tokenizer = tokenizer
+        if tokenizer_path:
+            self.tokenizer = open(tokenizer_path, "rb").read()
+        if tokenizer:
+            asc_str = tokenizer.encode("ascii")
+            self.tokenizer = base64.decodebytes(asc_str)
         self.max_length = max_length
         vocab_len = tfs.piece_size(model_proto=self.tokenizer)
         self.pad_id = vocab_len
@@ -56,13 +59,29 @@ class BertInput(tf.keras.layers.Layer):
         return pad(tokens, self.max_length), pad(segments, self.max_length)
 
     def get_config(self):
-        return {'tokenizer': self.tokenizer, 'max_length': self.max_length}
+        encoded = base64.encodebytes(self.tokenizer)
+        asc = encoded.decode('ascii')
+        return {'tokenizer': asc, 'max_length': self.max_length}
 
     # def compute_output_shape(self, input_shape):
     #  return ((input_shape[0], self.max_length), (input_shape[0], self.max_length))
 
 
-#layer = BertInput("/data/develop/sp_unigram_small.model")
+#encoded = base64.encodebytes(b"hello")
+#encoded_asc = encoded.decode('ascii')
+
+#t = encoded_asc.encode('ascii')
+
+#decoded = base64.decodebytes(t)
+#print(encoded, encoded_asc, decoded)
+#sys.exit()
+
+
+#layer = BertInput(tokenizer_path="/data/develop/sp_unigram_small.model")
+#conf = layer.get_config()
+#del layer
+#layer = BertInput.from_config(conf)
+
 #texts_a = tf.constant(["this is string", "and other"])
 #texts_b = tf.constant(["this is new string", "so"])
 #t, s = layer((texts_a, texts_b))

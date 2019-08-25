@@ -1,0 +1,1 @@
+from deco.sinks.parquet_writer import ParquetWriter
