@@ -1,6 +1,8 @@
 import pyarrow as pa
 import pyarrow.parquet as pq
 from deco.sources import Dataset
+import sys
+import numpy as np
 
 class ParquetWriter:
     def __init__(self, parent, filename, column_names = None):
@@ -16,7 +18,8 @@ class ParquetWriter:
                 for i in range(0, len(batch)):
                     self.column_names.append("col{}".format(i))
             for column in batch:
-                data.append(pa.array(column))
+                arr = pa.array(list(column))
+                data.append(arr)
             table = pa.Table.from_arrays(data, self.column_names)
             if not writer:
                 writer = pq.ParquetWriter(self.filename, table.schema)
