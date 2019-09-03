@@ -1,10 +1,16 @@
-from deco.sources import Dataset, Batch
+from deco.sources import Dataset, Window
 import deco
 import asyncio
 import multiprocessing
 from concurrent.futures import Executor
 from typing import Callable
 import numpy as np
+import sys
+
+def vectorize( fn):
+    def do_it (array):
+        return [fn(p) for p in array]
+    return do_it
 
 class Map(Dataset):
     def __init__(self, parent: Dataset, func: Callable, axis=0,
@@ -20,7 +26,9 @@ class Map(Dataset):
             self.executor = deco.default_executor
     async def __aiter__(self):
         if self.axis == 1:
-            self.func = np.vectorize(self.func)
+            self.func = vectorize(self.func)
+        if self.axis == 2:
+            self.func = vectorize(vectorize(self.func))
         loop = asyncio.get_running_loop()
         async for batch in self.parent.batch(self.parallel_tasks):
             coros = []

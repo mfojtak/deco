@@ -18,8 +18,8 @@ class Squeeze(Dataset):
         self.parent = parent
     async def __aiter__(self):
         async for item in self.parent:
-            #yield squeeze_rec(item)
-            yield np.squeeze(item)
+            yield squeeze_rec(item)
+            #yield np.squeeze(item)
 
 
 def squeeze(self):

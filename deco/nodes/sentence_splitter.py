@@ -12,8 +12,8 @@ class SentenceSplitter:
         res = self.tokenizer.tokenize(input)
         return res
 
-def split_sentence(self):
+def split_sentence(self, axis=0):
     splitter = SentenceSplitter()
-    return Map(self, splitter)
+    return Map(self, splitter, axis=axis)
 
 Dataset.split_sentence = split_sentence

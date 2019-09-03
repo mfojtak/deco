@@ -10,12 +10,10 @@ import keras_bert
 from deco.sources import Dataset
 import math
 
-def func(x):
-    return x.upper()
 
-res = Dataset.from_iterable([["xvvf"], ["dfdg", "sfsfs"]]).map(func, axis=1)
+tu = Dataset.from_iterable([[1,2,3,4], [5,6,7,8]]).window(2,1,axis=1).where(lambda a: len(a)==2)
 
-tt = Dataset.from_iterable(["Sentence a. Sentence b", "Sentence c"]).split_sentence()
+tt = Dataset.from_iterable([["Sentence a. Sentence b", "Sentence c"], ["test", "test. trest"]]).split_sentence(axis=1).concat()
 
 
 custom_objects = {**keras_bert.bert.get_custom_objects(), **deco.get_custom_objects(), 
@@ -44,7 +42,7 @@ arr = deco.sources.ArrowReader("example.arrow")
 
 async def main():
     #await p.run()
-    async for a in res:
+    async for a in tu:
         print(a)
 
 asyncio.run(main())
