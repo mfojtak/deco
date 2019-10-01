@@ -5,7 +5,7 @@ import glob
 class CSVReader(Dataset):
     def __init__(self, files):
         self.files = files
-    async def __aiter__(self):
+    async def __iter__(self):
         files_list = glob.glob(self.files)
         for file_path in files_list:
             with open(file_path) as csvfile:

@@ -9,9 +9,14 @@ import collections
 import keras_bert
 from deco.sources import Dataset
 import math
+import timeit
+import time
+from typing import Iterable, TypeVar, Generic
 
+test = Dataset.constant(np.ones(10000000)).batch(1000, axis=1).map(np.unique).concat(axis=0).reduce(np.unique)
 
 tu = Dataset.from_iterable([[1,2,3,4], [5,6,7,8]]).window(2,1,axis=1).where(lambda a: len(a)==2)
+tv = Dataset.from_iterable([[1,2,3,4], [5,6,7,8]]).shuffle()
 
 tt = Dataset.from_iterable([["Sentence a. Sentence b", "Sentence c"], ["test", "test. trest"]]).split_sentence(axis=1).concat()
 
@@ -24,6 +29,7 @@ vectors = names.map(model)
 merged = names + vectors
 p = merged.write_parquet("example.parquet")
 
+r = Dataset.from_parquet("example.parquet")
 
 t = deco.sources.Dataset.from_iterable([[["abc"]],[2],["qwe",["tyu"]],5,6]).squeeze()
 u = t.map(lambda x: [y+10 for y in x])
@@ -40,10 +46,15 @@ z = t + u
 
 arr = deco.sources.ArrowReader("example.arrow")
 
-async def main():
-    #await p.run()
-    async for a in tu:
-        print(a)
+#await p.run()
+#async for a in test:
+#    print(a)
 
-asyncio.run(main())
+start = time.time()
+res = test()
+print(res)
+end = time.time()
+print(end - start)
+    
+
 

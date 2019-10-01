@@ -24,18 +24,14 @@ class Map(Dataset):
             self.parallel_tasks = multiprocessing.cpu_count()
         if not self.executor:
             self.executor = deco.default_executor
-    async def __aiter__(self):
+    def __iter__(self):
         if self.axis == 1:
             self.func = vectorize(self.func)
         if self.axis == 2:
             self.func = vectorize(vectorize(self.func))
-        loop = asyncio.get_running_loop()
-        async for batch in self.parent.batch(self.parallel_tasks):
-            coros = []
-            for item in batch:
-                coros.append(loop.run_in_executor(self.executor, self.func, item))
-            items = await asyncio.gather(*coros)
-            for item in items:
+        for batch in self.parent.batch(self.parallel_tasks):
+            result = self.executor.map(self.func, batch)
+            for item in result:
                 yield item
 
 

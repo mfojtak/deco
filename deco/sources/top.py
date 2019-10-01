@@ -5,10 +5,10 @@ class Top(Dataset):
         self.parent = parent
         self.top = top
 
-    async def __aiter__(self):
-        iter = self.parent.__aiter__()
+    def __iter__(self):
+        iterator = iter(self.parent)
         for i in range(0,self.top):
-            item = await iter.__anext__()
+            item = next(iterator)
             yield item
 
 def top(self, top):

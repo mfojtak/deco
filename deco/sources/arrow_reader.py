@@ -4,7 +4,7 @@ import pyarrow as pa
 class ArrowReader(Dataset):
     def __init__(self, path):
         self.path = path
-    async def __aiter__(self):
+    async def __iter__(self):
         reader = pa.input_stream(self.path)
         while True:
             buf = reader.read()

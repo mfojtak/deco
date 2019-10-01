@@ -1,9 +1,9 @@
 from deco.sources import Dataset
 
 class IterableDataset(Dataset):
-    def __init__(self, parent):
+    def __init__(self, parent, axis=1):
         self.parent = parent
-    async def __aiter__(self):
+    def __iter__(self):
         for item in self.parent:
             yield item
 

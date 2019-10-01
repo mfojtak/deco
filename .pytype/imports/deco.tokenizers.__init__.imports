@@ -1,0 +1,4 @@
+sentencepiece /data/BioNLP/deco/.pytype/imports/default.pyi
+tensorflow/__init__ /data/BioNLP/deco/.pytype/imports/default.pyi
+numpy/__init__ /data/BioNLP/deco/.pytype/imports/default.pyi
+deco/tokenizers/sentencepiece /data/BioNLP/deco/.pytype/pyi/deco/tokenizers/sentencepiece.pyi

@@ -6,6 +6,7 @@ from deco.sources.arrow_reader import ArrowReader
 from deco.sources.window import Window
 from deco.sources.map import Map
 from deco.sources.iterable_dataset import IterableDataset
+from deco.sources.constant import Constant
 from deco.sources.top import Top
 from deco.sources.zip import Zip
 from deco.sources.squeeze import Squeeze
@@ -13,3 +14,5 @@ from deco.sources.expand import Expand
 from deco.sources.take import Take
 from deco.sources.concat import Concat
 from deco.sources.where import Where
+from deco.sources.reduce import Reduce
+import deco.sources.shuffle

@@ -6,7 +6,7 @@ from deco.sources import Dataset
 class ParquetReader(Dataset):
     def __init__(self, path):
         self.path = path
-    async def __aiter__(self):
+    def __iter__(self):
         parquet_file = pq.ParquetFile(self.path)
         groups = parquet_file.num_row_groups
         for i in range(0, groups):

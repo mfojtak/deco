@@ -1,0 +1,5 @@
+tensorflow/__init__ /data/BioNLP/deco/.pytype/imports/default.pyi
+tf_sentencepiece/__init__ /data/BioNLP/deco/.pytype/imports/default.pyi
+deco/layers/sentencepiece_tokenizer /data/BioNLP/deco/.pytype/pyi/deco/layers/sentencepiece_tokenizer.pyi
+deco/layers/bert_input /data/BioNLP/deco/.pytype/pyi/deco/layers/bert_input.pyi
+deco/layers/mapper /data/BioNLP/deco/.pytype/pyi/deco/layers/mapper.pyi

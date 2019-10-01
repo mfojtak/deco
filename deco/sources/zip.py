@@ -4,15 +4,14 @@ import asyncio
 class Zip(Dataset):
     def __init__(self, datasets):
         self.datasets = datasets
-    async def __aiter__(self):
-        iters = [dataset.__aiter__()
+    def __iter__(self):
+        iters = [iter(dataset)
                     for dataset in self.datasets]
         
         while True:
             try:
-                coros = [it.__anext__() for it in iters]
-                items = await asyncio.gather(*coros)
-            except StopAsyncIteration:
+                items = [next(it) for it in iters]
+            except StopIteration:
                 break
             else:
                 yield items
