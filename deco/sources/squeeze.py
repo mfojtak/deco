@@ -16,7 +16,7 @@ def squeeze_rec(item):
 class Squeeze(Dataset):
     def __init__(self, parent):
         self.parent = parent
-    async def __iter__(self):
+    def __iter__(self):
         for item in self.parent:
             yield squeeze_rec(item)
             #yield np.squeeze(item)

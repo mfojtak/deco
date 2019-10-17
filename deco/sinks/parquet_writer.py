@@ -9,9 +9,9 @@ class ParquetWriter:
         self.filename = filename
         self.parent = parent
         self.column_names = column_names
-    async def run(self):
+    def run(self):
         writer = None
-        async for batch in self.parent:
+        for batch in self.parent:
             data = []
             if not self.column_names:
                 self.column_names = []

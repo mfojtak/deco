@@ -20,8 +20,9 @@ class Map(Dataset):
         self.axis = axis
         self.executor = executor
         self.parallel_tasks = parallel_tasks
+        self.chunksize = 100
         if not self.parallel_tasks:
-            self.parallel_tasks = multiprocessing.cpu_count()
+            self.parallel_tasks = multiprocessing.cpu_count() * 2
         if not self.executor:
             self.executor = deco.default_executor
     def __iter__(self):
@@ -29,8 +30,8 @@ class Map(Dataset):
             self.func = vectorize(self.func)
         if self.axis == 2:
             self.func = vectorize(vectorize(self.func))
-        for batch in self.parent.batch(self.parallel_tasks):
-            result = self.executor.map(self.func, batch)
+        for batch in self.parent.batch(self.parallel_tasks * self.chunksize):
+            result = self.executor.map(self.func, batch, chunksize=self.chunksize)
             for item in result:
                 yield item
 

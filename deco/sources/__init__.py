@@ -15,4 +15,7 @@ from deco.sources.take import Take
 from deco.sources.concat import Concat
 from deco.sources.where import Where
 from deco.sources.reduce import Reduce
+from deco.sources.tensor_reader import TensorReader
+from deco.sources.fetch import Fetch
+from deco.sources.lookup import Lookup
 import deco.sources.shuffle

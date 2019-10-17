@@ -8,4 +8,4 @@ def get_custom_objects():
            "BertInput": deco.layers.BertInput}
     return ret
 
-default_executor = ThreadPoolExecutor(max_workers=multiprocessing.cpu_count())
+default_executor = ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()*2)

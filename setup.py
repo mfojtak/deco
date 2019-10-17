@@ -5,9 +5,6 @@ with codecs.open('README.md', 'r', 'utf8') as reader:
     long_description = reader.read()
 
 
-with codecs.open('requirements.txt', 'r', 'utf8') as reader:
-    install_requires = list(map(lambda x: x.strip(), reader.readlines()))
-
 
 setup(
     name='deco',
@@ -20,7 +17,9 @@ setup(
     description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=install_requires,
+    install_requires=["tensorflow-gpu", "numpy", "keras-bert", "pyarrow",
+        "sentencepiece @ https://github.com/google/sentencepiece/releases/download/v0.1.84/sentencepiece-0.1.84-cp37-cp37m-manylinux1_x86_64.whl",
+        "tf_sentencepiece @ https://github.com/google/sentencepiece/releases/download/v0.1.84/tf_sentencepiece-0.1.84-py2.py3-none-manylinux1_x86_64.whl"],
     scripts=['export_to_serving.py', 'server.py'],
     classifiers=(
         "Programming Language :: Python :: 2.7",

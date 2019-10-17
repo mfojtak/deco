@@ -17,5 +17,9 @@ class KerasModel:
         with self.lock:
             if not self.model:
                 self._load()
-        res = self.model.predict(np.array(input))
+        try:
+            res = self.model.predict(np.array(input))
+        except Exception as e:
+            print("Exception occured. Trying again")
+            res = self.model.predict(np.array(input))
         return res

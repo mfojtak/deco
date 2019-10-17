@@ -599,7 +599,7 @@ class Expr(ast3.NodeTransformer):
             if left.type.name == "int" and right.type.name == "index":
                 r = M.op("std.index_cast", [right.m], [self.int_type])
             if left.type.name == "index" and right.type.name == "int":
-                r = M.op("std.index_cast", [left.m], [self.int_type])
+                l = M.op("std.index_cast", [left.m], [self.int_type])
             var.m = l + r
             var.type = left.type
         if isinstance(node.op, ast3.Sub):
@@ -742,6 +742,7 @@ class Expr(ast3.NodeTransformer):
 SOURCE = """
 #import math
 def f(a: float) -> float:
+    b = 1
     return a
 def add(a: int, b: int, tt: Tensor[int, L[20,20]]) -> int:
     uu = tt[0,0]

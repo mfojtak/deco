@@ -5,9 +5,9 @@ class ArrowWriter:
     def __init__(self, parent, filename):
         self.filename = filename
         self.parent = parent
-    async def run(self):
+    def run(self):
         stream = pa.output_stream(self.filename)
-        async for item in self.parent:
+        for item in self.parent:
             buf = pa.serialize(item).to_buffer()
             stream.write(buf)
         stream.close()
