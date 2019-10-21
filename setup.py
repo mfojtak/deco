@@ -17,7 +17,7 @@ setup(
     description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=["tensorflow-gpu", "numpy", "keras-bert", "pyarrow",
+    install_requires=["tensorflow-gpu", "numpy", "keras-bert", "pyarrow", "quart", "faiss-cpu",
         "sentencepiece @ https://github.com/google/sentencepiece/releases/download/v0.1.84/sentencepiece-0.1.84-cp37-cp37m-manylinux1_x86_64.whl",
         "tf_sentencepiece @ https://github.com/google/sentencepiece/releases/download/v0.1.84/tf_sentencepiece-0.1.84-py2.py3-none-manylinux1_x86_64.whl"],
     scripts=['export_to_serving.py', 'server.py'],
