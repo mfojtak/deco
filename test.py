@@ -12,6 +12,14 @@ import math
 import timeit
 import time
 from typing import Iterable, TypeVar, Generic
+from deco.tokenizers import SentencepieceTokenizer
+
+tokenizer = SentencepieceTokenizer("/data/BioNLP/BERT/sp_bpe.vocab", "/data/BioNLP/BERT/sp_bpe.model")
+documents = ["This is a piece of text on neurodegeneration. This is second sentence", "Text. Text. This is second sentence. This is a second sentence"]
+ff = Dataset.create(documents).split_sentence().map(tokenizer.tokenize, axis=1).whole_word_mask(axis=1)
+for item in ff:
+    print(item)
+sys.exit()
 
 
 test = Dataset.constant(np.ones(10000000)).batch(1000, axis=1).map(np.unique).concat(axis=0).reduce(np.unique)

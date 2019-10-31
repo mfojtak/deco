@@ -104,7 +104,21 @@ class SentencepieceTokenizer(object):
   def ids_to_tokens(self, ids):
     return self.convert_by_vocab(self.inv_vocab, ids)
 
-  
+  def create_training(self, documents, seq_len=519):
+    for document in documents:
+      current_sample = ["CLS"]
+      for sentence in document:
+        sent_tokens = self.tokenize(sentence)
+        if len(current_sample) + len(sent_tokens) <= seq_len:
+          current_sample += sent_tokens
+        else:
+          if len(current_sample) > 1 and len(current_sample) <= seq_len:
+            yield current_sample
+          current_sample = ["CLS"] + sent_tokens
+      if len(current_sample) > 1 and len(current_sample) <= seq_len:
+        yield current_sample
+      
+
   def bert_create_pretrained(self, sentence_pairs,
                      seq_len=512,
                      mask_rate=0.15,

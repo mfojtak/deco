@@ -19,3 +19,4 @@ from deco.sources.tensor_reader import TensorReader
 from deco.sources.fetch import Fetch
 from deco.sources.lookup import Lookup
 import deco.sources.shuffle
+import deco.sources.whole_word_mask
