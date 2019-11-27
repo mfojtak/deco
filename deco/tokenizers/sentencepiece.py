@@ -77,6 +77,10 @@ class SentencepieceTokenizer(object):
         second_ids = self.tokens_to_ids(second_tokens) + [self.sep_id]
         segments += [1] * len(second_ids)
         ids += second_ids
+      if len(ids) > max_len:
+        ids = ids[:max_len]
+        segments = segments[:max_len]
+        ids[max_len-1] = self.sep_id
       pad = max_len - len(ids)
       segments += [0] * pad
       ids += [0] * pad
