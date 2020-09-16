@@ -4,8 +4,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 def get_custom_objects():
     ret = {
-            #"Mapper": deco.layers.Mapper,
-            #"BertInput": deco.layers.BertInput
+            "Mapper": deco.layers.Mapper,
+            "BertInput": deco.layers.BertInput,
+            "SentencepieceTokenizer": deco.layers.SentencepieceTokenizer
            }
     return ret
 
