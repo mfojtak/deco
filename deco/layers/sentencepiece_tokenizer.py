@@ -29,18 +29,18 @@ class SentencepieceTokenizer(tf.keras.layers.Layer):
         return {'model': asc}
 
 
-proto = open("/data/pubmed/sp_unigram_small.model", "rb").read()
-tok = SentencepieceTokenizer(model_path="/data/pubmed/sp_unigram_small.model")
-res = tok(["hello world", "what's up"])
-print(res)
-tf.saved_model.save(tok, "/data/deco/tmp")
+#proto = open("/data/pubmed/sp_unigram_small.model", "rb").read()
+#tok = SentencepieceTokenizer(model_path="/data/pubmed/sp_unigram_small.model")
+#res = tok(["hello world", "what's up"])
+#print(res)
+#tf.saved_model.save(tok, "/data/deco/tmp")
 
-tokenizer = text.WhitespaceTokenizer()
-tokens = tokenizer.tokenize(['everything not saved will be lost.'])
-print(tokens.to_list())
+#tokenizer = text.WhitespaceTokenizer()
+#tokens = tokenizer.tokenize(['everything not saved will be lost.'])
+#print(tokens.to_list())
 
 
-tokenizer = text.SentencepieceTokenizer(proto, tf.string)
-print(tokenizer.vocab_size())
-tokens = tokenizer.tokenize(['everything not saved will be lost.'])
-print(tokens.to_list())
+#tokenizer = text.SentencepieceTokenizer(proto, tf.string)
+#print(tokenizer.vocab_size())
+#tokens = tokenizer.tokenize(['everything not saved will be lost.'])
+#print(tokens.to_list())
