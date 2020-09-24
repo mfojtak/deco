@@ -29,7 +29,7 @@ class BertInput(tf.keras.layers.Layer):
         self.mask_id = vocab_len + 3
 
     def call(self, pieces):
-        if isinstance(pieces, collections.Sequence):
+        if isinstance(pieces, collections.abc.Sequence):
             pieces_a = pieces[0]
         else:
             pieces_a = pieces
@@ -42,7 +42,7 @@ class BertInput(tf.keras.layers.Layer):
         merged_a = tf.concat([cls_ids, pieces_a, sep_ids], axis=1)
         tokens = merged_a
         segments = tf.zeros_like(merged_a)
-        if isinstance(pieces, collections.Sequence):
+        if isinstance(pieces, collections.abc.Sequence):
             pieces_b = pieces[1]
             lengths_b = pieces_b.row_lengths()
             pieces_b = pieces_b.values
