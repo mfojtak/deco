@@ -34,9 +34,7 @@ class BertInput(tf.keras.layers.Layer):
         else:
             pieces_a = pieces
         lengths_a = pieces_a.row_lengths()
-        print(lengths_a)
         pieces_a = pieces_a.values
-        print(pieces_a)
         pieces_a = tf.where(tf.equal(pieces_a, 0), self.unk_id, pieces_a)
         pieces_a = tf.RaggedTensor.from_row_lengths(values=pieces_a, row_lengths=lengths_a)
         cls_ids = tf.fill([pieces_a.nrows(), 1], self.cls_id)
@@ -61,6 +59,12 @@ class BertInput(tf.keras.layers.Layer):
     # def compute_output_shape(self, input_shape):
     #  return ((input_shape[0], self.max_length), (input_shape[0], self.max_length))
 
+#from sentencepiece_tokenizer import SentencepieceTokenizer
+#tok = SentencepieceTokenizer(model_path="/data/pubmed/sp_unigram_small.model")
+#pieces = tok(["hello world", "here"])
+#print(pieces)
+#layer = BertInput(vocab_len=20000)
+#print(layer(pieces))
 
 #encoded = base64.encodebytes(b"hello")
 #encoded_asc = encoded.decode('ascii')
