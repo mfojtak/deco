@@ -16,9 +16,7 @@ class Mapper(tf.keras.layers.Layer):
         values = input
         if self.sort is not None:
             sorted_i = tf.argsort(input, direction=self.sort)
-            print(sorted_i)
             values = tf.gather(input, sorted_i, batch_dims=self.batch_dims)
-            print(values)
             indexes = tf.gather(self.map, sorted_i)
         return indexes, values
 
