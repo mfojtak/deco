@@ -17,7 +17,7 @@ setup(
     description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=["tensorflow-gpu", "numpy", "keras-bert", "pyarrow", 
+    install_requires=["tensorflow", "numpy", "keras-bert", "pyarrow", 
                         "quart", "faiss-cpu", "tensorflow-text", "sentencepiece"],
     scripts=['export_to_serving.py', 'server.py'],
     classifiers=(
