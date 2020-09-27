@@ -22,9 +22,9 @@ class Mapper(tf.keras.layers.Layer):
     def get_config(self):
         return {'map': self.map, 'sort': self.sort}
 
-import collections
-t = tf.constant([1,2,3])
-print(isinstance((1,2), collections.Sequence))
+#import collections
+#t = tf.constant([1,2,3])
+#print(isinstance((1,2), collections.Sequence))
 #mapper = Mapper([1234, 5678, 901234])
 #res = mapper([0.1, 0.9, 0.2])
 #print(res) 
