@@ -32,9 +32,9 @@ class SentencepieceTokenizer(tf.keras.layers.Layer):
         return self.tokenizer.vocab_size()
 
 
-proto = open("/data/pubmed/sp_unigram_small.model", "rb").read()
-tok = SentencepieceTokenizer(model_path="/data/pubmed/sp_unigram_small.model")
-print(tok.vocab_size())
+#proto = open("/data/pubmed/sp_unigram_small.model", "rb").read()
+#tok = SentencepieceTokenizer(model_path="/data/pubmed/sp_unigram_small.model")
+#print(tok.vocab_size())
 #res = tok(["hello world", "what's up"])
 #print(res)
 #tf.saved_model.save(tok, "/data/deco/tmp")
