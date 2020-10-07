@@ -1,4 +1,5 @@
 from deco.sources import Dataset
+import numpy as np
 
 class Where(Dataset):
     def __init__(self, parent, cond):

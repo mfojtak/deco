@@ -2,17 +2,33 @@ import sys
 import deco
 import asyncio
 import numpy as np
+
+a = np.array([[1,2], [1,4]])
+i = a > 1
+a[0][a[0]>1] = 5
+print(a)
+sys.exit()
+
 import pyarrow as pa
 import pyarrow.parquet as pq
 import contextlib
 import collections
-import keras_bert
+#import keras_bert
 from deco.sources import Dataset
 import math
 import timeit
 import time
 from typing import Iterable, TypeVar, Generic
 from deco.tokenizers import SentencepieceTokenizer
+
+ds = Dataset.create(["sent1 hello", "sent2 hello world", "sent3"])
+
+
+tu = Dataset.create([np.array([1,2,3]), [5,6,7,8]]) \
+            .pad((7,8), counts=(1,1)).pad(0,length=10)
+for item in tu:
+    print(item)
+sys.exit()
 
 tokenizer = SentencepieceTokenizer("/data/BioNLP/BERT/sp_bpe.vocab", "/data/BioNLP/BERT/sp_bpe.model")
 documents = ["This is a piece of text on neurodegeneration. This is second sentence", "Text. Text. This is second sentence. This is a second sentence"]
