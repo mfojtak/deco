@@ -5,5 +5,5 @@
 #from deco import executors
 #from deco import sources
 #from deco import sinks
-#from deco.deco import get_custom_objects
-from deco.deco import default_executor
+#from deco.utils import get_custom_objects
+#from deco.utils import default_executor

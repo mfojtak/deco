@@ -8,6 +8,6 @@ class IterableDataset(Dataset):
             yield item
 
 def from_iterable(parent):
-    return IterableDataset(parent)
+    return IterableDataset(parent=parent)
 
 Dataset.create = from_iterable

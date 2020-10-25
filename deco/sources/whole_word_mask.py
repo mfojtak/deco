@@ -2,55 +2,50 @@ from deco.sources import Dataset, Map
 import random
 from enum import Enum
 
-def process_sentencepiece(x, rate, mask):
+def process_sentencepiece(x, rate):
     res = []
     capturing = False
     for item in x:
         if item.startswith("▁"):
             if random.random() < rate:
-                res.append(mask)
+                res.append(1)
                 capturing = True
             else:
-                res.append(item)
+                res.append(0)
                 capturing = False
         else:
             if capturing:
-                res.append(mask)
+                res.append(1)
             else:
-                res.append(item)
+                res.append(0)
     return res
 
-def process_wordpiece(x, rate, mask):
+def process_wordpiece(x, rate):
     res = []
-    masked = []
     capturing = False
     for item in x:
         if not item.startswith("##"):
             if random.random() < rate:
-                res.append(mask)
-                masked.append(item)
+                res.append(True)
                 capturing = True
             else:
-                res.append(item)
-                masked.append("[PAD]")
+                res.append(False)
                 capturing = False
         else:
             if capturing:
-                res.append(mask)
-                masked.append(item)
+                res.append(True)
             else:
-                res.append(item)
-                masked.append("[PAD]")
-    return res, masked
+                res.append(False)
+    return res
 
 class Mode(Enum):
     SENTENCEPIECE = "sentencepiece"
     WORDPIECE = "wordpiece"
 
-def whole_word_mask(self, axis=0, rate=0.15, mask = "[MASK]", mode = Mode.WORDPIECE):
+def whole_word_mask(self, axis=0, rate=0.15, mode = Mode.WORDPIECE):
     if mode is Mode.SENTENCEPIECE:
-        return Map(self, func=lambda x: process_sentencepiece(x, rate, mask), axis=axis)
+        return Map(self, func=lambda x: process_sentencepiece(x, rate), axis=axis)
     elif mode is Mode.WORDPIECE:
-        return Map(self, func=lambda x: process_wordpiece(x, rate, mask), axis=axis)
+        return Map(self, func=lambda x: process_wordpiece(x, rate), axis=axis)
 
 Dataset.whole_word_mask = whole_word_mask

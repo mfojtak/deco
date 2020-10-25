@@ -8,7 +8,6 @@ def chunks(l, length, shift):
 
 class Window(Dataset):
     def __init__(self, parent, size, step=None, axis=0):
-        self.parent = parent
         self.size = size
         self.step = step
         if step == 0:
@@ -17,7 +16,7 @@ class Window(Dataset):
     def __iter__(self):
         if self.axis == 0:
             window = []
-            for item in self.parent:
+            for item in self.inputs():
                 window.append(item)
                 if len(window) == self.size:
                     yield window

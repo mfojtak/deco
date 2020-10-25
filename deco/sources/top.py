@@ -2,14 +2,14 @@ from deco.sources import Dataset
 
 class Top(Dataset):
     def __init__(self, parent, top=10):
-        self.parent = parent
         self.top = top
 
     def __iter__(self):
-        iterator = iter(self.parent)
-        for i in range(0,self.top):
-            item = next(iterator)
-            yield item
+        for i, item in enumerate(self.inputs()):
+            if i<self.top:
+                yield item
+            else:
+                break
 
 def top(self, top):
     return Top(self, top)

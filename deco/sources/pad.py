@@ -1,4 +1,4 @@
-from deco.sources import Dataset, Map
+from deco.sources import Dataset, Map, Output
 from functools import partial
 import numpy as np
 
@@ -12,6 +12,7 @@ def process(item, values, length, counts):
 
 def pad(self, values, length=None, counts=(1,1), axis=0):
     func = partial(process, values=values, length=length, counts=counts)
-    return Map(self, func=func, axis=axis)
+    output = Output.LIST if length == None else Output.NUMPY
+    return Map(self, func=func, axis=axis, output=output)
 
 Dataset.pad = pad

@@ -1,7 +1,54 @@
 import sys
+import numpy as np
+import redis
+import pickle
+
+arr = np.ones([5,5])
+
+b = pickle.dumps(arr)
+
+conn = redis.Redis("redis")
+conn.rpush("list1", b)
+conn.rpush("list1", "value2")
+
+val = conn.lpop("list1")
+print(pickle.loads(val))
+val = conn.lpop("list1")
+print(val)
+val = conn.lpop("list1")
+print(val)
+sys.exit()
+
+
+
+
 import deco
 import asyncio
-import numpy as np
+from deco.sources import Dataset
+import itertools
+
+cond = Dataset.create([0,1,0,0])
+y = Dataset.create([5,5,5,5])
+t = Dataset.create([1,2,3,4])
+u = t.where(cond=cond, y=y)
+c = u.batch(2)
+z = y.batch(2).full_like(-100)
+print(z.eval())
+
+sys.exit()
+
+
+z = t + u
+
+def gen():
+    for i in range(10):
+        yield i
+
+i1, i2 = itertools.tee(gen())
+for i in i1:
+    print(i)
+
+sys.exit()
 
 a = np.array([[1,2], [1,4]])
 i = a > 1
@@ -14,7 +61,6 @@ import pyarrow.parquet as pq
 import contextlib
 import collections
 #import keras_bert
-from deco.sources import Dataset
 import math
 import timeit
 import time

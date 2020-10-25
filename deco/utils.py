@@ -1,12 +1,12 @@
-import deco
+from deco.layers import Mapper, BertInput, SentencepieceTokenizer
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor
 
 def get_custom_objects():
     ret = {
-            "Mapper": deco.layers.Mapper,
-            "BertInput": deco.layers.BertInput,
-            "SentencepieceTokenizer": deco.layers.SentencepieceTokenizer
+            "Mapper": Mapper,
+            "BertInput": BertInput,
+            "SentencepieceTokenizer": SentencepieceTokenizer
            }
     return ret
 

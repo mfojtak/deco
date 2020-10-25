@@ -8,7 +8,7 @@ with codecs.open('README.md', 'r', 'utf8') as reader:
 
 setup(
     name='deco',
-    version='0.0.3',
+    version='0.0.4',
     packages=find_packages(),
     url='https://github.com/mfojtak/deco',
     license='MIT',
@@ -17,14 +17,12 @@ setup(
     description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=["tensorflow", "numpy", "keras-bert", "pyarrow", 
-                        "quart", "faiss-cpu", "tensorflow-text", "sentencepiece"],
+    install_requires=["tensorflow", "tensorflow-text", "sentencepiece"],
     scripts=['export_to_serving.py', 'server.py'],
-    classifiers=(
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.6",
+    classifiers=[
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ),
+    ],
 )
