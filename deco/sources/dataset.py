@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import itertools
-
+_current_context = None
 class Dataset(ABC):
     def __new__(cls, *args, **kwargs):
         obj = object.__new__(cls)
@@ -11,6 +11,8 @@ class Dataset(ABC):
                 obj._inputs.append(val)
                 val._outputs.append(obj)
         obj._iters = obj._inputs.copy()
+        if _current_context:
+            _current_context.add_node(obj)
         return obj
     
     def inputs(self):

@@ -17,7 +17,7 @@ setup(
     description='deco',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=["tensorflow", "tensorflow-text", "sentencepiece"],
+    install_requires=["tensorflow", "tensorflow-text", "sentencepiece", "pyarrow"],
     scripts=['export_to_serving.py', 'server.py'],
     classifiers=[
         "Programming Language :: Python :: 3.7",

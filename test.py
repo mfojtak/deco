@@ -1,39 +1,32 @@
 import sys
 import numpy as np
-import redis
+#import redis
 import pickle
 
-arr = np.ones([5,5])
 
-b = pickle.dumps(arr)
-
-conn = redis.Redis("redis")
-conn.rpush("list1", b)
-conn.rpush("list1", "value2")
-
-val = conn.lpop("list1")
-print(pickle.loads(val))
-val = conn.lpop("list1")
-print(val)
-val = conn.lpop("list1")
-print(val)
-sys.exit()
-
-
-
-
-import deco
 import asyncio
-from deco.sources import Dataset
+import deco
+from deco.sources import Dataset, ParallelContext
+from deco.sources import Graph
+from copy import deepcopy
 import itertools
 
-cond = Dataset.create([0,1,0,0])
-y = Dataset.create([5,5,5,5])
-t = Dataset.create([1,2,3,4])
-u = t.where(cond=cond, y=y)
-c = u.batch(2)
-z = y.batch(2).full_like(-100)
-print(z.eval())
+
+ds1 = Dataset.create(range(101))
+ds2 = Dataset.create(range(101))
+ctx = ParallelContext()
+with ctx:
+    res = ds1 * ds2
+
+#c = deepcopy(ctx())
+
+graph = Graph(ctx())
+print(graph.dot())
+graph.render("graph.png")
+sys.exit()
+
+for item in res:
+    print(item)
 
 sys.exit()
 

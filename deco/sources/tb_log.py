@@ -4,7 +4,7 @@ import tensorflow as tf
 import time        
 
 def handle(data, postfix, step):
-    if isinstance(data, list):
+    if isinstance(data, (list, tuple)):
         for i, item in enumerate(data):
             new_postfix = "{}_{}".format(postfix, i)
             handle(item, new_postfix, step)
@@ -17,13 +17,11 @@ def handle(data, postfix, step):
         tf.summary.scalar(name, data=data, step=step)
 
 class TbLog(Dataset):
-    def __init__(self, data: Dataset, folder: str=None):
+    def __init__(self, data: Dataset, folder: str="log/{time}"):
         self.folder = folder
     
     def __iter__(self):
         t = time.strftime("%Y%m%d-%H%M%S")
-        if not self.folder:
-            self.folder = "log/{time}"
         self.folder = self.folder.format(time=t)
         
         writer = tf.summary.create_file_writer(self.folder)
@@ -35,7 +33,7 @@ class TbLog(Dataset):
                 yield data
 
 
-def tb_log(self, folder=None):
+def tb_log(self, folder="log/{time}"):
     return TbLog(self, folder)
 
 Dataset.tb_log = tb_log

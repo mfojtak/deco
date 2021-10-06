@@ -1,0 +1,29 @@
+digraph {
+	node [shape=Mrecord]
+	Slice_0 [label="{Slice_0|start:0|step:2}"]
+	Multiply_1 [label="{Multiply_1}"]
+	Multiply_2 [label="{Multiply_2}"]
+	Slice_3 [label="{Slice_3|start:0|step:2}"]
+	Slice_4 [label="{Slice_4|start:0|step:2}"]
+	IterableDataset_5 [label="{IterableDataset_5}"]
+	Slice_6 [label="{Slice_6|start:0|step:2}"]
+	Cache_7 [label="{Cache_7}"]
+	Cache_8 [label="{Cache_8}"]
+	IterableDataset_9 [label="{IterableDataset_9}"]
+	subgraph cluster_1 {
+		Slice_6 -> Multiply_1
+		Slice_3 -> Multiply_1
+		Multiply_1 -> Cache_7
+		label=cluster_1
+	}
+	subgraph cluster_0 {
+		Slice_0 -> Multiply_2
+		Slice_4 -> Multiply_2
+		Multiply_2 -> Cache_8
+		label=cluster_0
+	}
+	IterableDataset_5 -> Slice_0
+	IterableDataset_9 -> Slice_3
+	IterableDataset_9 -> Slice_4
+	IterableDataset_5 -> Slice_6
+}

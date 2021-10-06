@@ -14,4 +14,3 @@ def take(self, indices, axis=0):
     return Take(self, indices=indices, axis=axis)
 
 Dataset.take = take
-Dataset.__getitem__ = take

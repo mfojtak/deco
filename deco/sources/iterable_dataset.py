@@ -6,6 +6,10 @@ class IterableDataset(Dataset):
     def __iter__(self):
         for item in self.parent:
             yield item
+    def get_data(self):
+        return self.parent
+    def set_data(self, data):
+        self.parent = data
 
 def from_iterable(parent):
     return IterableDataset(parent=parent)

@@ -24,12 +24,17 @@ from deco.sources.full_like import FullLike
 from deco.sources.logical_not import LogicalNot
 from deco.sources.cache import Cache
 from deco.sources.equal import Equal
+from deco.sources.multiply import Multiply, multiply
 from deco.sources.numpy import Numpy
 from deco.sources.softmax import Softmax
 from deco.sources.argmax import Argmax
 from deco.sources.predict import Predict
 from deco.sources.train import Train, train
 from deco.sources.tb_log import TbLog
+from deco.sources.parallel import Parallel
+from deco.sources.slice import Slice
+from deco.sources.context import ParallelContext
+from deco.sources.graph import Graph
 import deco.sources.shuffle
 import deco.sources.whole_word_mask
 import deco.sources.pad

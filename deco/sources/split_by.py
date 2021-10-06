@@ -8,7 +8,8 @@ class SplitBy(Dataset):
         agg = []
         for item in self.parent:
             if item == self.value:
-                yield agg
+                if len(agg) > 0:
+                    yield agg
                 agg = []
             else:
                 agg.append(item)
